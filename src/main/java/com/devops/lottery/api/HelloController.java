@@ -17,8 +17,11 @@ public final class HelloController {
 	public static String UmaVarfora_dos_padroes = "que zoera...";
 	public static int var = 0;
 
-	var += 9;
+	int test = -5;
+	int test2 = 3;
 
+	test = -test2;
+	test += test2;
 	private final Random random = new Random(System.currentTimeMillis());
 
 	@RequestMapping("/hello")
