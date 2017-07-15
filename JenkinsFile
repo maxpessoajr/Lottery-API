@@ -14,4 +14,22 @@ node{
             }
         )
     }
+    stage('Docker build'){
+        gitCommit = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+        def myapp = docker.build "olikoloko/devopsworkshop:${gitCommit}"
+    }
+    stage('Deploying local app'){
+        sh "docker run -d --name load-tests-app -p 9000:8080 olikoloko/devopsworkshop:${gitCommit}"
+
+    }
+    stage('Execute Jmeter tests'){
+        sh "/var/jenkins_home/apache-jmeter-3.2/bin/jmeter -n -t jmeter-tests/FirstTestPlan.jmx -l output.jtl"
+
+    }
+  	stage('Publish Jmeter Tests'){
+		perfReport errorFailedThreshold: 1, modeOfThreshold: true, persistConstraintLog: true, sourceDataFiles: 'output.jtl'
+  	}
+  	stage('Publish docker image'){
+  	    sh "docker push olikoloko/devopsworkshop:${gitCommit}"
+  	}
 }
