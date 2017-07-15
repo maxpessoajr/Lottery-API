@@ -15,6 +15,9 @@ import java.util.Random;
 @RestController
 public final class HelloController {
 	public static String UmaVarfora_dos_padroes = "que zoera...";
+	public static int var = 0;
+
+	var += 9;
 
 	private final Random random = new Random(System.currentTimeMillis());
 
