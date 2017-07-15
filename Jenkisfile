@@ -1,0 +1,8 @@
+node {
+    stage('Git clone') {
+        git branch: 'azeitado', url: 'https://github.com/maxpessoajr/Lottery-API.git'
+    }
+    stage('Build'){
+        sh "./gradlew build"
+    }
+}
