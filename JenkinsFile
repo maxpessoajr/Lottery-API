@@ -9,7 +9,6 @@ node{
             },
             "Sonar analisys" :{
                 withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
-                    sh "echo ${SONAR_TOKEN}"
                     sh "./gradlew -Dsonar.login=${SONAR_TOKEN} sonarqube "
                 }
             }
