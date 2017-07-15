@@ -1,0 +1,6 @@
+lottery-app:
+  image: lottery-app
+  container-name: dev_lottery-app
+  environment:
+    VIRTUAL_HOST: showdomilhao.workshop.com
+    VIRTUAL_PORT: 8080
